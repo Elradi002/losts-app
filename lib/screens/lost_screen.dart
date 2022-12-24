@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:losts_app/models/constants.dart';
 import 'package:losts_app/models/lost_item.dart';
 import 'package:losts_app/widgets/informs_list.dart';
-
+import 'package:losts_app/widgets/new_lost.dart';
+import 'package:provider/provider.dart';
+import 'package:losts_app/providers/items_provider.dart';
 import '../widgets/new_lost.dart';
 
 class LostScreen extends StatefulWidget {
@@ -47,6 +49,7 @@ class _LostScreenState extends State<LostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<LostItem> _losts = context.watch<ItemProvider>().lostItems;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -66,7 +69,7 @@ class _LostScreenState extends State<LostScreen> {
                     ),
                   ],
                 )
-              : InformsList(_losts),
+              : InformsList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

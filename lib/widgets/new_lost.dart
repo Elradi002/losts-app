@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:losts_app/models/constants.dart';
+import 'package:losts_app/models/lost_item.dart';
+import 'package:losts_app/providers/items_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/constants.dart';
 import 'custom_button.dart';
@@ -49,7 +53,7 @@ class _NewLostState extends State<NewLost> {
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               'Inform about lost item ...',
               style: kLargeTittle,
               textAlign: TextAlign.left,
@@ -104,13 +108,37 @@ class _NewLostState extends State<NewLost> {
               textStyle: kButtonTheme,
               height: 50,
               onTabHandler: () {
-                widget.addLost(
-                    _nameController.text,
-                    _typeController.text,
-                    _placeController.text,
-                    int.parse(_phoneController.text),
-                    _descriptionController.text);
-                Navigator.of(context).pop();
+                context.read<ItemProvider>().addLost(LostItem(
+                      id: '',
+                      name: _nameController.text,
+                      type: _typeController.text,
+                      place: _placeController.text,
+                      phoneNumber: int.parse(_phoneController.text),
+                      description: _descriptionController.text,
+                      date: _selectedDate,
+                    ));
+                // context.read<ItemProvider>().add(LostItem(
+                //     id: '',
+                //     name: _nameController.text,
+                //     type: _typeController.text,
+                //     place: _placeController.text,
+                //     phoneNumber: int.parse(_phoneController.text),
+                //     description: _descriptionController.text,
+                //     date: _selectedDate,
+                //   ));
+                // context.read()<LostItem>()(
+                //       _nameController.text,
+                //       _typeController.text,
+                //       _placeController.text,
+                //       int.parse(_phoneController.text),
+                //       _descriptionController.text,
+                //     );
+                if (context.read<ItemProvider>().addLostDone == true) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('lost Item added successfully تم إضافة العنصر بنجاح')));
+
+                  Navigator.of(context).pop();
+                }
               },
             ),
           ],

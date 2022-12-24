@@ -4,24 +4,29 @@ import 'package:intl/intl.dart';
 import '../models/constants.dart';
 import '../models/lost_item.dart';
 import '../screens/lost_item_details_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/items_provider.dart';
+
 
 class InformsList extends StatefulWidget {
-  final List<LostItem> _informs;
-  const InformsList(this._informs, {super.key});
+ 
+  const InformsList({super.key});
   @override
   State<InformsList> createState() => _InformsListState();
 }
 
 class _InformsListState extends State<InformsList> {
+
   @override
   Widget build(BuildContext context) {
+    final List<LostItem> _informs = context.read<ItemProvider>().lostItems;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8.0),
         child: SizedBox(
           height: 600,
           child: ListView.builder(
-            itemCount: widget._informs.length,
+            itemCount: _informs.length,
             itemBuilder: (ctx, index) {
               return InkWell(
                 onTap: () {
@@ -62,7 +67,7 @@ class _InformsListState extends State<InformsList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget._informs[index].name,
+                                 _informs[index].name,
                                   overflow: TextOverflow.ellipsis,
                                   style: kLargeTittle,
                                 ),
@@ -75,7 +80,7 @@ class _InformsListState extends State<InformsList> {
                                     ),
                                     const SizedBox(width: 5.0),
                                     Text(
-                                      widget._informs[index].type,
+                                     _informs[index].type,
                                       overflow: TextOverflow.ellipsis,
                                       style: kSmallTittle,
                                     ),
@@ -89,7 +94,7 @@ class _InformsListState extends State<InformsList> {
                                       color: Colors.black87,
                                     ),
                                     const SizedBox(width: 5.0),
-                                    Text(widget._informs[index].place,
+                                    Text(_informs[index].place,
                                         overflow: TextOverflow.ellipsis,
                                         style: kSmallTittle),
                                   ],
@@ -104,7 +109,7 @@ class _InformsListState extends State<InformsList> {
                                     const SizedBox(width: 5.0),
                                     Text(
                                       DateFormat.yMd()
-                                          .format(widget._informs[index].date),
+                                          .format(_informs[index].date),
                                       style:
                                           const TextStyle(color: Colors.grey),
                                     ),
@@ -119,7 +124,7 @@ class _InformsListState extends State<InformsList> {
                                     ),
                                     const SizedBox(width: 5.0),
                                     Text(
-                                        widget._informs[index].phoneNumber
+                                        _informs[index].phoneNumber
                                             .toString(),
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(

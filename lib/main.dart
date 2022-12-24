@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:losts_app/screens/lost_item_details_screen.dart';
 import 'package:losts_app/screens/search_screen.dart';
 import 'package:losts_app/screens/tabs_screen.dart';
+import 'package:provider/provider.dart';
+import 'providers/items_provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ItemProvider())
+      ],
+    child: const MyApp()));
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<ItemProvider>(context, listen: false).getFounds();
+    Provider.of<ItemProvider>(context, listen: false).getLosts();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,9 +41,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const TabsScreen(),
       routes: {
-        TabsScreen.routeName: (ctx) => const TabsScreen(),
-        SearchScreen.routeName: (ctx) => const SearchScreen(),
-        LostItemDetailsScreen.routeName: (ctx) => const LostItemDetailsScreen(),
+        TabsScreen.routeName: (context) => const TabsScreen(),
+        SearchScreen.routeName: (context) => const SearchScreen(),
+        LostItemDetailsScreen.routeName: (context) => const LostItemDetailsScreen(),
       },
     );
   }

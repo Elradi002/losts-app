@@ -4,7 +4,8 @@ import 'package:losts_app/models/lost_item.dart';
 import '../models/constants.dart';
 import '../widgets/founds_list.dart';
 import '../widgets/new_found.dart';
-
+import 'package:provider/provider.dart';
+import '../providers/items_provider.dart';
 class FoundScreen extends StatefulWidget {
   const FoundScreen({super.key});
 
@@ -13,6 +14,12 @@ class FoundScreen extends StatefulWidget {
 }
 
 class _FoundScreenState extends State<FoundScreen> {
+  InitState() {
+    super.initState();
+    context.read<ItemProvider>().getFounds();
+    context.read<ItemProvider>().getLosts();
+    print("from init state  ${context.read<ItemProvider>().foundItems} ");
+  }
   final List<LostItem> _founds = [];
 
   void _addNewFound(
@@ -22,6 +29,8 @@ class _FoundScreenState extends State<FoundScreen> {
     int phoneNumber,
     String itemDescription,
   ) {
+    
+    
     final newFound = LostItem(
       id: DateTime.now().toString(),
       name: itemName,
@@ -47,6 +56,7 @@ class _FoundScreenState extends State<FoundScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<LostItem> _founds = context.watch<ItemProvider>().foundItems;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -66,7 +76,7 @@ class _FoundScreenState extends State<FoundScreen> {
                     ),
                   ],
                 )
-              : FoundsList(_founds),
+              : FoundsList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

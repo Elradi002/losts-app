@@ -42,13 +42,13 @@ class _TabsScreenState extends State<TabsScreen> {
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           onTap: _selectScreen,
-          unselectedItemColor: Colors.white,
-          selectedItemColor: Theme.of(context).colorScheme.secondary,
+          unselectedItemColor: Theme.of(context).colorScheme.secondary,
+          selectedItemColor: Colors.white,
           currentIndex: _selectedScreenIndex,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.list,
+                Icons.search,
                 size: 30,
               ),
               label: 'Lost',

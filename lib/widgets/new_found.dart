@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:losts_app/providers/items_provider.dart';
+import 'package:provider/provider.dart';
+import '../models/lost_item.dart';
+import '../providers/items_provider.dart';
 import '../models/constants.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
@@ -104,13 +107,21 @@ class _NewFoundState extends State<NewFound> {
               textStyle: kButtonTheme,
               height: 50,
               onTabHandler: () {
-                widget.addFound(
-                    _nameController.text,
-                    _typeController.text,
-                    _placeController.text,
-                    int.parse(_phoneController.text),
-                    _descriptionController.text);
+              context.read<ItemProvider>().addFound(
+                    LostItem(
+                      id: '',
+                      name: _nameController.text,
+                      type: _typeController.text,
+                      place: _placeController.text,
+                      phoneNumber: int.parse(_phoneController.text),
+                      description: _descriptionController.text,
+                      date: _selectedDate,
+                    ),
+              );
+              if(context.watch<ItemProvider>().addFoundDone == true) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('founded Item added successfully')));
                 Navigator.of(context).pop();
+              }
               },
             ),
           ],
