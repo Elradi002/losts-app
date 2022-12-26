@@ -13,39 +13,74 @@ class ItemProvider with ChangeNotifier {
   bool get addFoundDone => _addFoundDone;
   bool _addLostDone = false;
   bool get addLostDone => _addLostDone;
+  bool _serverLoading = false;
+  bool get serverLoading => _serverLoading;
+  DioService dioService = DioService();
 
-
-DioService dioService = DioService();
-
-  void getFounds() async {
+  Future<void> getFounds() async {
     _foundItems = await dioService.getFounds();
     notifyListeners();
   }
 
-  void getLosts() async {
+  Future<void> getLosts() async {
     _lostItems = await dioService.getlost();
     notifyListeners();
   }
-  void addFound(LostItem item) async {
-   await dioService.addFound(item);
-   if(dioService.addFoundFlag == true){
-     _addFoundDone = true;
+
+  Future<bool> addFound(LostItem item) async {
+    await dioService.addFound(item);
+    if (dioService.addFoundFlag == true) {
+      _addFoundDone = true;
       notifyListeners();
-   }
-    
-  }
-  void addLost(LostItem item) async {
-    await dioService.addLost(item);
-    if(dioService.addLostFlag == true){
-      _addLostDone = true;
-       notifyListeners();
+      return true;
     }
-   
+    return false;
+  }
+
+  Future<bool> addLost(LostItem item) async {
+    bool adding = await dioService.addLost(item);
+    if (adding) {
+      _addLostDone = true;
+      return true;
+    }
+    notifyListeners();
+    return false;
+  }
+
+  LostItem lostByID(int id) {
+    LostItem item = _lostItems.elementAt(id);
+    //   _foundItems.elementAt(id);
+    //   _lostItems.fold(null, (previousValue, element) {
+    //     if (element.id == id) {
+    //       return element;
+    //     }
+    //   });
+    return item;
+  }
+
+  LostItem foundByID(int id) {
+    LostItem item = _foundItems.elementAt(id);
+
+    return item;
+  }
+
+  Future<bool> checkServerStatus() async {
+    _serverLoading = true;
+    await Future.delayed(Duration(seconds: 3));
+    bool status = await dioService.checkServerStatus();
+    if (status == true) {
+      await getFounds();
+      await getLosts();
+      _serverLoading = false;
+      print('from provider: $status');
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 
   void remove(LostItem item) {
-  //  _items.remove(item);
+    //  _items.remove(item);
     notifyListeners();
   }
 }
-

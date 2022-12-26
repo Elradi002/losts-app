@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:losts_app/screens/found_item_details_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/items_provider.dart';
 import '../models/constants.dart';
@@ -29,7 +30,8 @@ class _FoundsListState extends State<FoundsList> {
               return InkWell(
                 onTap: () {
                   Navigator.of(context)
-                      .pushNamed(LostItemDetailsScreen.routeName);
+                      .pushNamed(FoundItemDetailsScreen.routeName, arguments:
+                      index,) ;
                 },
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 10),

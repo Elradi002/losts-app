@@ -7,16 +7,13 @@ import '../screens/lost_item_details_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/items_provider.dart';
 
-
 class InformsList extends StatefulWidget {
- 
   const InformsList({super.key});
   @override
   State<InformsList> createState() => _InformsListState();
 }
 
 class _InformsListState extends State<InformsList> {
-
   @override
   Widget build(BuildContext context) {
     final List<LostItem> _informs = context.read<ItemProvider>().lostItems;
@@ -31,7 +28,9 @@ class _InformsListState extends State<InformsList> {
               return InkWell(
                 onTap: () {
                   Navigator.of(context)
-                      .pushNamed(LostItemDetailsScreen.routeName);
+                      .pushNamed(LostItemDetailsScreen.routeName, arguments:
+                     index,
+                  );
                 },
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 10),
@@ -67,7 +66,7 @@ class _InformsListState extends State<InformsList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 _informs[index].name,
+                                  _informs[index].name,
                                   overflow: TextOverflow.ellipsis,
                                   style: kLargeTittle,
                                 ),
@@ -80,7 +79,7 @@ class _InformsListState extends State<InformsList> {
                                     ),
                                     const SizedBox(width: 5.0),
                                     Text(
-                                     _informs[index].type,
+                                      _informs[index].type,
                                       overflow: TextOverflow.ellipsis,
                                       style: kSmallTittle,
                                     ),
@@ -123,9 +122,7 @@ class _InformsListState extends State<InformsList> {
                                       color: Colors.black87,
                                     ),
                                     const SizedBox(width: 5.0),
-                                    Text(
-                                        _informs[index].phoneNumber
-                                            .toString(),
+                                    Text(_informs[index].phoneNumber.toString(),
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                             color: Colors.grey)),

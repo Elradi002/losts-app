@@ -5,19 +5,19 @@ import '../providers/items_provider.dart';
 import '../models/constants.dart';
 import 'package:provider/provider.dart';
 
-class LostItemDetailsScreen extends StatelessWidget {
-  static const routeName = '/lost-item-detail-screen';
+class FoundItemDetailsScreen extends StatelessWidget {
+  static const routeName = '/found-item-detail-screen';
 
-  const LostItemDetailsScreen({super.key});
+  const FoundItemDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final itemId = ModalRoute.of(context)?.settings.arguments as int;
-    final item = context.read<ItemProvider>().lostByID(itemId);
+    final item = context.read<ItemProvider>().foundByID(itemId);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Lost item ${item.name}"),
+          title: Text("found item ${item.name}"),
         ),
         drawer: const MainDrawer(),
         body: Stack(

@@ -108,7 +108,9 @@ class _NewLostState extends State<NewLost> {
               textStyle: kButtonTheme,
               height: 50,
               onTabHandler: () {
-                context.read<ItemProvider>().addLost(LostItem(
+                context
+                    .read<ItemProvider>()
+                    .addLost(LostItem(
                       id: '',
                       name: _nameController.text,
                       type: _typeController.text,
@@ -116,7 +118,15 @@ class _NewLostState extends State<NewLost> {
                       phoneNumber: int.parse(_phoneController.text),
                       description: _descriptionController.text,
                       date: _selectedDate,
-                    ));
+                    ))
+                    .then((value) {
+                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                          'lost Item added successfully تم إضافة العنصر بنجاح')));
+
+                  Navigator.of(context).pop();
+                });
+
                 // context.read<ItemProvider>().add(LostItem(
                 //     id: '',
                 //     name: _nameController.text,
@@ -133,12 +143,8 @@ class _NewLostState extends State<NewLost> {
                 //       int.parse(_phoneController.text),
                 //       _descriptionController.text,
                 //     );
-                if (context.read<ItemProvider>().addLostDone == true) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('lost Item added successfully تم إضافة العنصر بنجاح')));
-
-                  Navigator.of(context).pop();
-                }
+               
+                
               },
             ),
           ],

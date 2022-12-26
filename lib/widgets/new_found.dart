@@ -102,28 +102,30 @@ class _NewFoundState extends State<NewFound> {
             ),
             const SizedBox(height: 20.0),
             CustomButton(
-              backgroundColor: buttonTheme,
-              text: 'Submit ',
-              textStyle: kButtonTheme,
-              height: 50,
-              onTabHandler: () {
-              context.read<ItemProvider>().addFound(
-                    LostItem(
-                      id: '',
-                      name: _nameController.text,
-                      type: _typeController.text,
-                      place: _placeController.text,
-                      phoneNumber: int.parse(_phoneController.text),
-                      description: _descriptionController.text,
-                      date: _selectedDate,
-                    ),
-              );
-              if(context.watch<ItemProvider>().addFoundDone == true) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('founded Item added successfully')));
-                Navigator.of(context).pop();
-              }
-              },
-            ),
+                backgroundColor: buttonTheme,
+                text: 'Submit ',
+                textStyle: kButtonTheme,
+                height: 50,
+                onTabHandler: () {
+                  context
+                      .read<ItemProvider>()
+                      .addFound(
+                        LostItem(
+                          id: '',
+                          name: _nameController.text,
+                          type: _typeController.text,
+                          place: _placeController.text,
+                          phoneNumber: int.parse(_phoneController.text),
+                          description: _descriptionController.text,
+                          date: _selectedDate,
+                        ),
+                      )
+                      .then((value) => ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(
+                              content: Text(
+                                  'founded Item added successfully تم اضافة العنصر  بنجاح'))));
+                        Navigator.of(context).pop();
+                }),
           ],
         ),
       ),

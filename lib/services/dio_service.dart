@@ -39,11 +39,7 @@ class DioService {
     return founds;
   }
 
-
-
-
-
- // return lost Items 
+  // return lost Items
   Future<List<LostItem>> getlost() async {
     final response = await http.get(Uri.parse(lostUrl));
     final extractedData = json.decode(response.body) as List<dynamic>;
@@ -79,22 +75,21 @@ class DioService {
     // });
   }
 
-
   Future<void> addFound(LostItem found) async {
     final response = await http.post(
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=UTF-8	',
       },
       Uri.parse(addFoundUrl),
       //
-    //     {
-    //     "itemName": "dog",
-    //     "itemType": "aniaml",
-    //     "place": "khartoum",
-    //     "phoneNum": "0966194883",
-    //     "description": "lost in khartoum in burri",
-    //     "date": "2022-12-22"
-    // }
+      //     {
+      //     "itemName": "dog",
+      //     "itemType": "aniaml",
+      //     "place": "khartoum",
+      //     "phoneNum": "0966194883",
+      //     "description": "lost in khartoum in burri",
+      //     "date": "2022-12-22"
+      // }
       body: json.encode({
         'itemName': found.name,
         'date': found.date.toIso8601String(),
@@ -104,15 +99,16 @@ class DioService {
         'description': found.description,
       }),
     );
-   if (response.statusCode >= 400) {
+    if (response.statusCode >= 400) {
       throw Exception('Error adding found item ${response.reasonPhrase}');
-    }else if (response.statusCode == 201) {
-     _addFoundFlag = true;
+    } else if (response.statusCode == 201) {
+      _addFoundFlag = true;
       print('success : ${response.statusCode} added found item successfully');
     }
     // notifyListeners();
   }
-  Future<void> addLost(LostItem lost) async {
+
+  Future<bool> addLost(LostItem lost) async {
     final response = await http.post(
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -129,10 +125,25 @@ class DioService {
     );
     if (response.statusCode >= 400) {
       throw Exception('Error adding lost item ${response.reasonPhrase}');
-    }else if (response.statusCode == 201) {
-     _addLostFlag = true;
+    } else if (response.statusCode == 201) {
+      _addLostFlag = true;
       print('success : ${response.statusCode} added lost item successfully');
+      //  notifyListeners();
+      return true;
     }
-    // notifyListeners();
+    return false;
+  }
+
+
+  Future<bool> checkServerStatus() async {
+    final response = await http
+        .get(Uri.parse('http://localhost:8080/api/V1/Found/server_status'));
+    print(response);
+    if (response.statusCode == 200) {
+      print('server is running');
+      return true;
+    } else {
+      return false;
+    }
   }
 }

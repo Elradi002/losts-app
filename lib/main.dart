@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:losts_app/screens/founds_screen.dart';
 import 'package:losts_app/screens/lost_item_details_screen.dart';
 import 'package:losts_app/screens/search_screen.dart';
 import 'package:losts_app/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/items_provider.dart';
-
+import './screens/found_item_details_screen.dart';
+import './screens/splash_screen.dart';
 void main() => runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => ItemProvider())
@@ -39,11 +41,12 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: const TabsScreen(),
+      home:  SplashScreen(),
       routes: {
         TabsScreen.routeName: (context) => const TabsScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),
         LostItemDetailsScreen.routeName: (context) => const LostItemDetailsScreen(),
+        FoundItemDetailsScreen.routeName: (context) => const FoundItemDetailsScreen(),
       },
     );
   }

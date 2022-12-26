@@ -8,8 +8,8 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+         foregroundColor: Colors.black,
+         backgroundColor: Colors.white,
         // The search area here
         title: Container(
           width: double.infinity,
