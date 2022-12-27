@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:losts_app/providers/items_provider.dart';
 import 'package:provider/provider.dart';
-import '../models/lost_item.dart';
-import '../providers/items_provider.dart';
+
 import '../models/constants.dart';
+import '../models/language_constants.dart';
+import '../models/lost_item.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
@@ -50,31 +51,31 @@ class _NewFoundState extends State<NewFound> {
       child: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Inform about found item ...',
+              translation(context).informAboutFoundItem,
               style: kLargeTittle,
               textAlign: TextAlign.left,
             ),
             const SizedBox(height: 30),
-            Text('Name of found item : ', style: kSmallTittle),
+            Text(translation(context).nameOfFoundItem, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_nameController),
             const SizedBox(height: 20.0),
-            Text('Type of found item : ', style: kSmallTittle),
+            Text(translation(context).typeOfFoundItem, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_typeController),
             const SizedBox(height: 20.0),
-            Text('Place of found : ', style: kSmallTittle),
+            Text(translation(context).placeOfFound, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_placeController),
             const SizedBox(height: 20.0),
-            Text('Your phone : ', style: kSmallTittle),
+            Text(translation(context).yourPhone, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_phoneController),
             const SizedBox(height: 20.0),
-            Text('Found item Description : ', style: kSmallTittle),
+            Text(translation(context).itemDescription, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_descriptionController),
             const SizedBox(height: 10.0),
@@ -83,8 +84,8 @@ class _NewFoundState extends State<NewFound> {
                 Expanded(
                   child: Text(
                     _selectedDate == null
-                        ? 'No date chosen!'
-                        : 'Picked Date : ${DateFormat.yMd().format(_selectedDate)}',
+                        ? translation(context).noDateChosen
+                        : '${translation(context).pickedDate} ${DateFormat.yMd().format(_selectedDate)}',
                     style: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
@@ -93,9 +94,10 @@ class _NewFoundState extends State<NewFound> {
                 ),
                 TextButton(
                   onPressed: _presentDatePicker,
-                  child: const Text(
-                    'Chose Date',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  child: Text(
+                    translation(context).choseDate,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
               ],
@@ -103,7 +105,7 @@ class _NewFoundState extends State<NewFound> {
             const SizedBox(height: 20.0),
             CustomButton(
                 backgroundColor: buttonTheme,
-                text: 'Submit ',
+                text: translation(context).submit,
                 textStyle: kButtonTheme,
                 height: 50,
                 onTabHandler: () {
@@ -121,10 +123,10 @@ class _NewFoundState extends State<NewFound> {
                         ),
                       )
                       .then((value) => ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
-                              content: Text(
-                                  'founded Item added successfully تم اضافة العنصر  بنجاح'))));
-                        Navigator.of(context).pop();
+                          .showSnackBar(SnackBar(
+                              content: Text(translation(context)
+                                  .itemAddedSuccessfully))));
+                  Navigator.of(context).pop();
                 }),
           ],
         ),

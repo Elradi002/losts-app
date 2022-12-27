@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/models/lost_item.dart';
+import 'package:provider/provider.dart';
 
 import '../models/constants.dart';
+import '../models/language_constants.dart';
+import '../providers/items_provider.dart';
 import '../widgets/founds_list.dart';
 import '../widgets/new_found.dart';
-import 'package:provider/provider.dart';
-import '../providers/items_provider.dart';
+
 class FoundScreen extends StatefulWidget {
   const FoundScreen({super.key});
 
@@ -20,6 +22,7 @@ class _FoundScreenState extends State<FoundScreen> {
     context.read<ItemProvider>().getLosts();
     print("from init state  ${context.read<ItemProvider>().foundItems} ");
   }
+
   final List<LostItem> _founds = [];
 
   void _addNewFound(
@@ -29,8 +32,6 @@ class _FoundScreenState extends State<FoundScreen> {
     int phoneNumber,
     String itemDescription,
   ) {
-    
-    
     final newFound = LostItem(
       id: DateTime.now().toString(),
       name: itemName,
@@ -64,9 +65,9 @@ class _FoundScreenState extends State<FoundScreen> {
           child: _founds.isEmpty
               ? Column(
                   children: [
-                    const Center(
+                    Center(
                       child: Text(
-                        'No founds items added yet !!',
+                        translation(context).noLostFoundsItemsAddedYet,
                         style: kLargeTittle,
                       ),
                     ),

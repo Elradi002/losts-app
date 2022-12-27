@@ -10,7 +10,7 @@ class SearchIcon extends StatelessWidget {
     return InkWell(
       child: FittedBox(
         child: Container(
-          margin: const EdgeInsets.only(top: 3, bottom: 3, right: 5),
+          padding: const EdgeInsets.only(top: 3, bottom: 3, right: 3),
           child: const Icon(Icons.search, size: 10, color: Colors.white),
         ),
       ),
