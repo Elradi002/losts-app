@@ -64,7 +64,7 @@ class _NewFoundState extends State<NewFound> {
           SizedBox(
             height: MediaQuery.of(context).size.height / 4,
             child: Center(
-              child: Text(translation(context).noLostFoundsItemsAddedYet,
+              child: Text(translation(context).informAboutFoundItem,
                   textAlign: TextAlign.center, style: kLargeTittle),
             ),
           ),
