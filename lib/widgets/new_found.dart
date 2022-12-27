@@ -69,9 +69,11 @@ class _NewFoundState extends State<NewFound> {
             ),
           ),
           TextFormField(
-            validator: (val) {
-              if (val != null && val.isEmpty) {
+            validator: (nameController) {
+              if (nameController != null && nameController.isEmpty) {
                 return translation(context).requiredField;
+              } else if (nameController!.length! < 8) {
+                return translation(context).requiredFieldNum;
               }
               return null;
             },
@@ -114,9 +116,11 @@ class _NewFoundState extends State<NewFound> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            validator: (val) {
-              if (val != null && val.isEmpty) {
+            validator: (phoneController) {
+              if (phoneController != null && phoneController.isEmpty) {
                 return translation(context).requiredField;
+              } else if (phoneController!.length! < 11) {
+                return translation(context).requiredFieldPh;
               }
               return null;
             },
@@ -129,9 +133,12 @@ class _NewFoundState extends State<NewFound> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            validator: (val) {
-              if (val != null && val.isEmpty) {
+            validator: (descriptionController) {
+              if (descriptionController != null &&
+                  descriptionController.isEmpty) {
                 return translation(context).requiredField;
+              } else if (descriptionController!.length! < 20) {
+                return translation(context).requiredFieldDes;
               }
               return null;
             },
