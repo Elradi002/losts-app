@@ -12,23 +12,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.of(context).pushNamed(TabsScreen.routeName);
-    });
+    Provider.of<ItemProvider>(context, listen: false).checkServerStatus();
 
-    // context.watch<ItemProvider>().checkServerStatus().then((value) => {
-    //   Navigator.of(context).pushNamed(TabsScreen.routeName)
-    // });
+    // .then(
+    //     (value) => {Navigator.of(context).pushNamed(TabsScreen.routeName)});
+    // context.watch<ItemProvider>().checkServerStatus().then(
+    //     (value) => {Navigator.of(context).pushNamed(TabsScreen.routeName)});
+    // Future.delayed(Duration(seconds: 3), () {
+    //   Navigator.of(context).pushNamed(TabsScreen.routeName);
   }
+
+  // context.watch<ItemProvider>().checkServerStatus().then((value) => {
+  //   Navigator.of(context).pushNamed(TabsScreen.routeName)
+  // });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    // context.read<ItemProvider>().checkServerStatus().then((value) => {
-    //   Navigator.of(context).pushNamed(TabsScreen.routeName)});
-    bool status = context.read<ItemProvider>().serverLoading;
+    bool status = true;
+    //= context.read<ItemProvider>().serverLoading;
+    if (context.read<ItemProvider>().errorMessage.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.read<ItemProvider>().errorMessage)));
+    }
     context.read<ItemProvider>().checkServerStatus().then(
         (value) => {Navigator.of(context).pushNamed(TabsScreen.routeName)});
-    print("from splash : ");
     // animated splash screen
     return Scaffold(
       body: Stack(

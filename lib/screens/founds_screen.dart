@@ -18,9 +18,7 @@ class FoundScreen extends StatefulWidget {
 class _FoundScreenState extends State<FoundScreen> {
   InitState() {
     super.initState();
-    context.read<ItemProvider>().getFounds();
-    context.read<ItemProvider>().getLosts();
-    print("from init state  ${context.read<ItemProvider>().foundItems} ");
+    print("from found init state ");
   }
 
   final List<LostItem> _founds = [];
@@ -58,6 +56,7 @@ class _FoundScreenState extends State<FoundScreen> {
   @override
   Widget build(BuildContext context) {
     List<LostItem> _founds = context.watch<ItemProvider>().foundItems;
+      Provider.of<ItemProvider>(context, listen: false).getFounds();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

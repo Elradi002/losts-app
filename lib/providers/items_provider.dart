@@ -7,6 +7,7 @@ class ItemProvider with ChangeNotifier {
 
   List<LostItem> get foundItems => _foundItems;
   List<LostItem> _lostItems = [];
+  String errorMessage = '';
 
   List<LostItem> get lostItems => _lostItems;
   bool _addFoundDone = false;
@@ -19,11 +20,16 @@ class ItemProvider with ChangeNotifier {
 
   Future<void> getFounds() async {
     _foundItems = await dioService.getFounds();
+    errorMessage = dioService.errorMessage;
+    print("from get founds : $errorMessage");
     notifyListeners();
   }
 
   Future<void> getLosts() async {
     _lostItems = await dioService.getlost();
+    errorMessage = dioService.errorMessage;
+    print("from get lost : $errorMessage");
+
     notifyListeners();
   }
 
@@ -31,6 +37,7 @@ class ItemProvider with ChangeNotifier {
     await dioService.addFound(item);
     if (dioService.addFoundFlag == true) {
       _addFoundDone = true;
+      errorMessage = dioService.errorMessage;
       notifyListeners();
       return true;
     }
@@ -41,6 +48,7 @@ class ItemProvider with ChangeNotifier {
     bool adding = await dioService.addLost(item);
     if (adding) {
       _addLostDone = true;
+      errorMessage = dioService.errorMessage;
       return true;
     }
     notifyListeners();
@@ -66,13 +74,15 @@ class ItemProvider with ChangeNotifier {
 
   Future<bool> checkServerStatus() async {
     _serverLoading = true;
-    await Future.delayed(Duration(seconds: 3));
+    //await Future.delayed(Duration(seconds: 3));
     bool status = await dioService.checkServerStatus();
     if (status == true) {
       await getFounds();
       await getLosts();
       _serverLoading = false;
       print('from provider: $status');
+      errorMessage = dioService.errorMessage;
+      print("from check server: $errorMessage");
       notifyListeners();
       return true;
     }

@@ -17,6 +17,12 @@ class LostScreen extends StatefulWidget {
 
 class _LostScreenState extends State<LostScreen> {
   final List<LostItem> _losts = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<ItemProvider>(context, listen: false).getLosts();
+    super.initState();
+  }
 
   void _addNewLost(
     String itemName,
