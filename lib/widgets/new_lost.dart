@@ -44,7 +44,6 @@ class _NewLostState extends State<NewLost> {
 
   @override
   Widget build(BuildContext context) {
-    final buttonTheme = Theme.of(context).colorScheme.secondary;
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 30),
       child: SingleChildScrollView(
