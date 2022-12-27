@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/language_constants.dart';
+
 class SearchScreen extends StatelessWidget {
   static const routeName = '/search-screen';
   const SearchScreen({Key? key}) : super(key: key);
@@ -8,8 +10,8 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         foregroundColor: Colors.black,
-         backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         // The search area here
         title: Container(
           width: double.infinity,
@@ -20,14 +22,15 @@ class SearchScreen extends StatelessWidget {
             child: TextField(
               autofocus: true,
               decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search, color: Colors.black),
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear, color: Colors.black),
+                    icon: const Icon(Icons.clear, color: Colors.teal),
                     onPressed: () {
+                      Navigator.pop(context);
                       /* Clear the search field */
                     },
                   ),
-                  hintText: 'Search...',
+                  hintText: translation(context).searchText,
                   border: InputBorder.none),
             ),
           ),

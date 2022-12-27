@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:losts_app/widgets/LanguageIcon.dart';
 import 'package:losts_app/widgets/search_icon.dart';
 
+import '../models/language_constants.dart';
 import '../widgets/main_drawer.dart';
 import 'founds_screen.dart';
 import 'lost_screen.dart';
@@ -30,11 +32,12 @@ class _TabsScreenState extends State<TabsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            _screens[_selectedScreenIndex]['title'],
-          ),
+          title: Text(translation(context).lostAndFound
+              //_screens[_selectedScreenIndex]['title'],
+              ),
           actions: const [
             SearchIcon(),
+            LanguageIcon(),
           ],
         ),
         drawer: MainDrawer(),
@@ -45,20 +48,20 @@ class _TabsScreenState extends State<TabsScreen> {
           unselectedItemColor: Theme.of(context).colorScheme.secondary,
           selectedItemColor: Colors.white,
           currentIndex: _selectedScreenIndex,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 size: 30,
               ),
-              label: 'Lost',
+              label: translation(context).lost,
             ),
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.local_florist,
                 size: 30,
               ),
-              label: 'Found',
+              label: translation(context).found,
             ),
           ],
         ),

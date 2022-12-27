@@ -5,7 +5,7 @@ import 'package:losts_app/models/lost_item.dart';
 import 'package:losts_app/providers/items_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../models/constants.dart';
+import '../models/language_constants.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
@@ -51,31 +51,31 @@ class _NewLostState extends State<NewLost> {
       child: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Inform about lost item ...',
+            Text(
+              translation(context).informAboutLostItem,
               style: kLargeTittle,
               textAlign: TextAlign.left,
             ),
             const SizedBox(height: 30),
-            Text('Name of lost item : ', style: kSmallTittle),
+            Text(translation(context).nameOfLostItem, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_nameController),
             const SizedBox(height: 20.0),
-            Text('Type of lost item : ', style: kSmallTittle),
+            Text(translation(context).typeOfLostItem, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_typeController),
             const SizedBox(height: 20.0),
-            Text('Place of lost : ', style: kSmallTittle),
+            Text(translation(context).placeOfLost, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_placeController),
             const SizedBox(height: 20.0),
-            Text('Your phone : ', style: kSmallTittle),
+            Text(translation(context).yourPhone, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_phoneController),
             const SizedBox(height: 20.0),
-            Text('Lost item Description : ', style: kSmallTittle),
+            Text(translation(context).itemDescription, style: kSmallTittle),
             const SizedBox(height: 8.0),
             customTextField(_descriptionController),
             const SizedBox(height: 10.0),
@@ -84,8 +84,8 @@ class _NewLostState extends State<NewLost> {
                 Expanded(
                   child: Text(
                     _selectedDate == null
-                        ? 'No date chosen!'
-                        : 'Picked Date : ${DateFormat.yMd().format(_selectedDate)}',
+                        ? translation(context).noDateChosen
+                        : '${translation(context).pickedDate} ${DateFormat.yMd().format(_selectedDate)}',
                     style: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
@@ -94,9 +94,10 @@ class _NewLostState extends State<NewLost> {
                 ),
                 TextButton(
                   onPressed: _presentDatePicker,
-                  child: const Text(
-                    'Chose Date',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  child: Text(
+                    translation(context).choseDate,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
               ],
@@ -104,7 +105,7 @@ class _NewLostState extends State<NewLost> {
             const SizedBox(height: 20.0),
             CustomButton(
               backgroundColor: buttonTheme,
-              text: 'Submit ',
+              text: translation(context).submit,
               textStyle: kButtonTheme,
               height: 50,
               onTabHandler: () {
@@ -120,9 +121,9 @@ class _NewLostState extends State<NewLost> {
                       date: _selectedDate,
                     ))
                     .then((value) {
-                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                          'lost Item added successfully تم إضافة العنصر بنجاح')));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                          Text(translation(context).itemAddedSuccessfully)));
 
                   Navigator.of(context).pop();
                 });
@@ -143,8 +144,6 @@ class _NewLostState extends State<NewLost> {
                 //       int.parse(_phoneController.text),
                 //       _descriptionController.text,
                 //     );
-               
-                
               },
             ),
           ],

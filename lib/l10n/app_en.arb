@@ -1,0 +1,31 @@
+{
+"lostAndFound":"Lost & Found",
+"foundItem":"found item",
+"description": "Description :",
+"noLostFoundsItemsAddedYet":"No items added yet !!",
+"lostItem":"Lost item",
+"searchText":"Search...",
+"search":"Search",
+"found":"Found",
+"lost":"Lost",
+"lists":"Lists",
+"listOfLost":"List of lost",
+"listOfFound":"List of found",
+"informAboutFoundItem":"Inform about found item ...",
+"nameOfFoundItem" : "Name of found item :",
+"typeOfFoundItem" :"Type of found item :",
+"placeOfFound" :"Place of found :",
+"informAboutLostItem":"Inform about lost item ...",
+"nameOfLostItem": "Name of lost item :",
+"typeOfLostItem":"Type of lost item :",
+"placeOfLost":"Place of lost :",
+"yourPhone":"Your phone :",
+"itemDescription":"item Description :",
+"noDateChosen":"No date chosen!",
+"pickedDate":"Picked Date :",
+"choseDate":"Chose Date",
+"submit":"Submit",
+"itemAddedSuccessfully":"Item added successfully .."
+}
+
+

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:losts_app/widgets/main_drawer.dart';
-import '../providers/items_provider.dart';
-import '../models/constants.dart';
 import 'package:provider/provider.dart';
+
+import '../models/constants.dart';
+import '../models/language_constants.dart';
+import '../providers/items_provider.dart';
 
 class LostItemDetailsScreen extends StatelessWidget {
   static const routeName = '/lost-item-detail-screen';
@@ -17,7 +19,7 @@ class LostItemDetailsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Lost item ${item.name}"),
+          title: Text("${translation(context).lostItem} ${item.name}"),
         ),
         drawer: const MainDrawer(),
         body: Stack(
@@ -58,20 +60,19 @@ class LostItemDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children:  [
+                            children: [
                               Icon(
                                 Icons.place,
                                 color: Colors.black87,
                               ),
                               SizedBox(width: 5.0),
-                              Text(
-                                item.place,
+                              Text(item.place,
                                   overflow: TextOverflow.ellipsis,
                                   style: kSmallTittle),
                             ],
                           ),
                           Row(
-                            children:  [
+                            children: [
                               Icon(
                                 Icons.phone_in_talk,
                                 color: Colors.black87,
@@ -100,12 +101,12 @@ class LostItemDetailsScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      const Text(
-                        'Description : ',
+                      Text(
+                        translation(context).description,
                         style: kLargeTittle,
                       ),
                       const SizedBox(height: 5.0),
-                       Text(
+                      Text(
                         item.description,
                         style: kDetailsText,
                         textAlign: TextAlign.justify,

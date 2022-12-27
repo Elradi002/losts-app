@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/models/constants.dart';
 import 'package:losts_app/models/lost_item.dart';
+import 'package:losts_app/providers/items_provider.dart';
 import 'package:losts_app/widgets/informs_list.dart';
 import 'package:losts_app/widgets/new_lost.dart';
 import 'package:provider/provider.dart';
-import 'package:losts_app/providers/items_provider.dart';
-import '../widgets/new_lost.dart';
+
+import '../models/language_constants.dart';
 
 class LostScreen extends StatefulWidget {
   const LostScreen({super.key});
@@ -63,9 +64,9 @@ class _LostScreenState extends State<LostScreen> {
           child: _losts.isEmpty
               ? Column(
                   children: [
-                    const Center(
+                    Center(
                       child: Text(
-                        'No lost items added yet !!',
+                        translation(context).noLostFoundsItemsAddedYet,
                         style: kLargeTittle,
                       ),
                     ),
@@ -75,7 +76,7 @@ class _LostScreenState extends State<LostScreen> {
                     ),
                   ],
                 )
-              : InformsList(),
+              : const InformsList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:losts_app/screens/tabs_screen.dart';
 
 import '../models/constants.dart';
+import '../models/language_constants.dart';
 import '../screens/search_screen.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -30,30 +31,30 @@ class MainDrawer extends StatelessWidget {
             height: 80,
             width: double.infinity,
             padding: const EdgeInsets.all(20),
-            alignment: Alignment.centerLeft,
+            //alignment: Alignment.centerLeft,
             color: Theme.of(context).colorScheme.secondary,
-            child: const Text(
-              'Lists',
+            child: Text(
+              translation(context).lists,
               style: kAppBarTheme,
             ),
           ),
           const SizedBox(height: 20),
           buildListTile(
-            'Search',
+            translation(context).search,
             Icons.search,
             () {
               Navigator.of(context).pushNamed(SearchScreen.routeName);
             },
           ),
           buildListTile(
-            'List of lost',
+            translation(context).listOfLost,
             Icons.list,
             () {
               Navigator.of(context).pushNamed(TabsScreen.routeName);
             },
           ),
           buildListTile(
-            'List of found',
+            translation(context).listOfFound,
             Icons.local_florist,
             () {
               Navigator.of(context).pushNamed(TabsScreen.routeName);
