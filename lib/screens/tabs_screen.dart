@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/widgets/LanguageIcon.dart';
-import 'package:losts_app/widgets/search_icon.dart';
 
 import '../models/language_constants.dart';
 import '../widgets/main_drawer.dart';
@@ -36,7 +35,7 @@ class _TabsScreenState extends State<TabsScreen> {
               //_screens[_selectedScreenIndex]['title'],
               ),
           actions: const [
-            SearchIcon(),
+            //SearchIcon(),
             LanguageIcon(),
           ],
         ),
