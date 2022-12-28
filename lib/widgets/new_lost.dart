@@ -169,10 +169,10 @@ class _NewLostState extends State<NewLost> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
-              } else if (val != RegExp(r"^[A-Z a-z]+$")) {
+              } else if (!isValidName(val)) {
                 return translation(context).enterValidName;
               }
-              return null;
+              return null;;
             },
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -216,9 +216,9 @@ class _NewLostState extends State<NewLost> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
-              } else if (val!.length < 11) {
+              } else if (val!.length < 10) {
                 return translation(context).requiredFieldPh;
-              } else if (val != RegExp(r"[0-9]")) {
+              } else if (!isValidPhone(val)) {
                 return translation(context).enterValidPhone;
               }
               return null;
@@ -308,6 +308,17 @@ class _NewLostState extends State<NewLost> {
         ],
       ),
     );
+  }
+
+  bool isValidName(value) {
+    final nameRegExp =
+        RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
+    return nameRegExp.hasMatch(value);
+  }
+
+  bool isValidPhone(value) {
+    final nameRegExp = RegExp(r"[0-9]");
+    return nameRegExp.hasMatch(value);
   }
 }
 // CustomButton(
