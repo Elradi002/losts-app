@@ -164,10 +164,10 @@ class _NewLostState extends State<NewLost> {
             ),
           ),
           TextFormField(
-            validator: (nameController) {
-              if (nameController != null && nameController.isEmpty) {
+            validator: (val) {
+              if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
-              } else if (nameController!.length! < 8) {
+              } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
               }
               return null;
@@ -211,10 +211,10 @@ class _NewLostState extends State<NewLost> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            validator: (phoneController) {
-              if (phoneController != null && phoneController.isEmpty) {
+            validator: (val) {
+              if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
-              } else if (phoneController!.length! < 11) {
+              } else if (val!.length < 11) {
                 return translation(context).requiredFieldPh;
               }
               return null;
@@ -228,11 +228,10 @@ class _NewLostState extends State<NewLost> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            validator: (descriptionController) {
-              if (descriptionController != null &&
-                  descriptionController.isEmpty) {
+            validator: (val) {
+              if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
-              } else if (descriptionController!.length! < 20) {
+              } else if (val!.length < 20) {
                 return translation(context).requiredFieldDes;
               }
               return null;
