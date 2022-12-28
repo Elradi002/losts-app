@@ -172,7 +172,7 @@ class _NewLostState extends State<NewLost> {
               } else if (!isValidName(val)) {
                 return translation(context).enterValidName;
               }
-              return null;;
+              return null;
             },
             decoration: InputDecoration(
               border: const OutlineInputBorder(),

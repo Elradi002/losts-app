@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:losts_app/screens/lost_item_details_screen.dart';
 import 'package:losts_app/screens/search_screen.dart';
-import 'package:losts_app/screens/splash_screen.dart';
 import 'package:losts_app/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
-      home:  SplashScreen(),
+      home: TabsScreen(),
       routes: {
         TabsScreen.routeName: (context) => const TabsScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),
