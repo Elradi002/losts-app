@@ -159,7 +159,7 @@ class _NewLostState extends State<NewLost> {
           SizedBox(
             height: MediaQuery.of(context).size.height / 4,
             child: Center(
-              child: Text(translation(context).noLostFoundsItemsAddedYet,
+              child: Text(translation(context).informAboutLostItem,
                   textAlign: TextAlign.center, style: kLargeTittle),
             ),
           ),
@@ -167,6 +167,8 @@ class _NewLostState extends State<NewLost> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length < 8) {
+                return translation(context).requiredFieldNum;
               }
               return null;
             },
@@ -212,6 +214,8 @@ class _NewLostState extends State<NewLost> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length < 11) {
+                return translation(context).requiredFieldPh;
               }
               return null;
             },
@@ -227,6 +231,8 @@ class _NewLostState extends State<NewLost> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length < 20) {
+                return translation(context).requiredFieldDes;
               }
               return null;
             },

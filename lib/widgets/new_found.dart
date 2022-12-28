@@ -64,7 +64,7 @@ class _NewFoundState extends State<NewFound> {
           SizedBox(
             height: MediaQuery.of(context).size.height / 4,
             child: Center(
-              child: Text(translation(context).noLostFoundsItemsAddedYet,
+              child: Text(translation(context).informAboutFoundItem,
                   textAlign: TextAlign.center, style: kLargeTittle),
             ),
           ),
@@ -72,7 +72,12 @@ class _NewFoundState extends State<NewFound> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length < 8) {
+                return translation(context).requiredFieldNum;
               }
+              // else if (nameController == RegExp(r"^[A-Z a-z]+$")) {
+              //   return 'please inter a valid character ';
+              // }
               return null;
             },
             decoration: InputDecoration(
@@ -117,6 +122,8 @@ class _NewFoundState extends State<NewFound> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length != 10) {
+                return translation(context).requiredFieldPh;
               }
               return null;
             },
@@ -126,12 +133,15 @@ class _NewFoundState extends State<NewFound> {
               hintText: translation(context).hintPhone,
             ),
             controller: _phoneController,
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 10),
           TextFormField(
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
+              } else if (val!.length < 20) {
+                return translation(context).requiredFieldDes;
               }
               return null;
             },
