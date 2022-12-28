@@ -20,7 +20,7 @@ class DioService {
 
   Future<List<LostItem>> getFounds() async {
     final response = await http.get(Uri.parse(foundUrl));
-    final extractedData = json.decode(response.body) as List<dynamic>;
+    final extractedData = json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     if (extractedData == null) {
       return [];
     }
@@ -65,7 +65,7 @@ class DioService {
   // return lost Items
   Future<List<LostItem>> getlost() async {
     final response = await http.get(Uri.parse(lostUrl));
-    final extractedData = json.decode(response.body) as List<dynamic>;
+    final extractedData = json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     if (extractedData == null) {
       return [];
     }
