@@ -5,7 +5,6 @@ import 'package:losts_app/providers/items_provider.dart';
 import 'package:losts_app/widgets/informs_list.dart';
 import 'package:losts_app/widgets/new_lost.dart';
 import 'package:provider/provider.dart';
-
 import '../models/language_constants.dart';
 
 class LostScreen extends StatefulWidget {
@@ -31,6 +30,7 @@ class _LostScreenState extends State<LostScreen> {
     int phoneNumber,
     String itemDescription,
   ) {
+    
     final newLost = LostItem(
       id: DateTime.now().toString(),
       name: itemName,
