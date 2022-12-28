@@ -169,6 +169,8 @@ class _NewLostState extends State<NewLost> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
+              } else if (val != RegExp(r"^[A-Z a-z]+$")) {
+                return translation(context).enterValidName;
               }
               return null;
             },
@@ -216,6 +218,8 @@ class _NewLostState extends State<NewLost> {
                 return translation(context).requiredField;
               } else if (val!.length < 11) {
                 return translation(context).requiredFieldPh;
+              } else if (val != RegExp(r"[0-9]")) {
+                return translation(context).enterValidPhone;
               }
               return null;
             },

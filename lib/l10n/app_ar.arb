@@ -1,4 +1,7 @@
 {
+"requiredFieldDes":"يجب ان يكون الوصف اكثر من 20 حرف",
+"requiredFieldPh":"يجب ان يتكون رقم الهاتف من 10 ارقام",
+"requiredFieldNum":" يجب ان يتكون الاسم من 8 حرف اواكثر",
 "requiredField": "يتطلب حقلا",
 "lostAndFound":"المفقودات والموجودات",
 "foundItem":"تفاصيل العنصر",
@@ -16,6 +19,8 @@
 "listOfFound":"قائمة الموجودات",
 "informAboutFoundItem":"ابلاغ عن عنصر تم ايجاده ...",
 "foundNameHint" : "اسم العنصر :",
+"enterValidName":"الرجاء ادخال الاسم صحيحا",
+"enterValidPhone":"الرجاء ادخال رقم هاتف صحيح",
 "type" :"النوع",
 "hintTypeOfFoundItem" :"نوع العنصر ",
 "place" :"المكان",

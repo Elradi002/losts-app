@@ -74,10 +74,9 @@ class _NewFoundState extends State<NewFound> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
+              } else if (val != RegExp(r"^[A-Z a-z]+$")) {
+                return translation(context).enterValidName;
               }
-              // else if (nameController == RegExp(r"^[A-Z a-z]+$")) {
-              //   return 'please inter a valid character ';
-              // }
               return null;
             },
             decoration: InputDecoration(
@@ -124,6 +123,8 @@ class _NewFoundState extends State<NewFound> {
                 return translation(context).requiredField;
               } else if (val!.length != 10) {
                 return translation(context).requiredFieldPh;
+              } else if (val != RegExp(r"[0-9]")) {
+                return translation(context).enterValidPhone;
               }
               return null;
             },

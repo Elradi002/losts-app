@@ -6,7 +6,6 @@ import 'package:losts_app/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 
 import './screens/found_item_details_screen.dart';
-import './screens/splash_screen.dart';
 import 'models/language_constants.dart';
 import 'providers/items_provider.dart';
 
@@ -64,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
-      home: SplashScreen(),
+      home: const TabsScreen(),
       routes: {
         TabsScreen.routeName: (context) => const TabsScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),
