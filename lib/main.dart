@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
-      home: TabsScreen(),
+      home: const FoundItemDetailsScreen(),
       routes: {
         TabsScreen.routeName: (context) => const TabsScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),
