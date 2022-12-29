@@ -8,7 +8,10 @@ class ItemProvider with ChangeNotifier {
   List<LostItem> get foundItems => _foundItems;
   List<LostItem> _lostItems = [];
   String errorMessage = '';
-
+  String _isLost = '';
+  String get isLost => _isLost;
+  String _isFound = '';
+  String get isFound => _isFound;
   List<LostItem> get lostItems => _lostItems;
   bool _addFoundDone = false;
   bool get addFoundDone => _addFoundDone;
@@ -63,12 +66,13 @@ class ItemProvider with ChangeNotifier {
     //       return element;
     //     }
     //   });
+    _isFound = 'true';
     return item;
   }
 
   LostItem foundByID(int id) {
     LostItem item = _foundItems.elementAt(id);
-
+    _isLost = 'true';
     return item;
   }
 
