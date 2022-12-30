@@ -3,7 +3,7 @@ import 'package:losts_app/screens/tabs_screen.dart';
 
 import '../models/constants.dart';
 import '../models/language_constants.dart';
-import '../screens/search_screen.dart';
+import 'LanguageIcon.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -33,19 +33,25 @@ class MainDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             //alignment: Alignment.centerLeft,
             color: Theme.of(context).colorScheme.secondary,
-            child: Text(
-              translation(context).lists,
-              style: kAppBarTheme,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  translation(context).lists,
+                  style: kAppBarTheme,
+                ),
+                const LanguageIcon(),
+              ],
             ),
           ),
           const SizedBox(height: 20),
-          buildListTile(
-            translation(context).search,
-            Icons.search,
-            () {
-              Navigator.of(context).pushNamed(SearchScreen.routeName);
-            },
-          ),
+          // buildListTile(
+          //   translation(context).search,
+          //   Icons.search,
+          //   () {
+          //     Navigator.of(context).pushNamed(SearchScreen.routeName);
+          //   },
+          // ),
           buildListTile(
             translation(context).listOfLost,
             Icons.list,

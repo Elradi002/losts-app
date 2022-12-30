@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../screens/search_screen.dart';
-
 class SearchIcon extends StatelessWidget {
   const SearchIcon({super.key});
 
@@ -15,7 +13,7 @@ class SearchIcon extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed(SearchScreen.routeName);
+        // Navigator.of(context).pushNamed(LostScreen.routeName);
       },
     );
   }
