@@ -35,8 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(context.read<ItemProvider>().errorMessage)));
     }
-    context.read<ItemProvider>().checkServerStatus().then(
-        (value) => {Navigator.of(context).pushNamed(TabsScreen.routeName)});
+    context.read<ItemProvider>().checkServerStatus().then((value) async => {
+          await Future.delayed(const Duration(seconds: 4)),
+          Navigator.of(context).pushNamed(TabsScreen.routeName)
+        });
+
     // animated splash screen
     return Scaffold(
       body: Stack(

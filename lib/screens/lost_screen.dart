@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:losts_app/models/constants.dart';
 import 'package:losts_app/models/lost_item.dart';
 import 'package:losts_app/providers/items_provider.dart';
-import 'package:losts_app/widgets/informs_list.dart';
+import 'package:losts_app/widgets/Lostinforms_list.dart';
 import 'package:losts_app/widgets/new_lost.dart';
 import 'package:provider/provider.dart';
 import '../models/language_constants.dart';
-
+import '../widgets/Lostinforms_list.dart';
 class LostScreen extends StatefulWidget {
   const LostScreen({super.key});
 
@@ -76,7 +76,7 @@ class _LostScreenState extends State<LostScreen> {
                     ),
                   ],
                 )
-              : const InformsList(),
+              : const LostInformsList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

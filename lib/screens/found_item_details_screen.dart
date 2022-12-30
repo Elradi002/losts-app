@@ -9,8 +9,9 @@ import '../providers/items_provider.dart';
 
 class FoundItemDetailsScreen extends StatelessWidget {
   static const routeName = '/found-item-detail-screen';
+  //final String image = 'assets/images/lost_item.jpg';
 
-  const FoundItemDetailsScreen({super.key});
+  const FoundItemDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +32,11 @@ class FoundItemDetailsScreen extends StatelessWidget {
                 width: double.maxFinite,
                 height: 300,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    //image should came from the database
-                    image: AssetImage("assets/images/lostBag.jpg"),
-                  ),
-                ),
+                    image: DecorationImage(
+                  fit: BoxFit.cover,
+                  //image should came from the database
+                  image: AssetImage("image/lostBag.jpg"),
+                )),
               ),
             ),
             Positioned(

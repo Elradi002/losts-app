@@ -172,7 +172,8 @@ class _NewLostState extends State<NewLost> {
               } else if (!isValidName(val)) {
                 return translation(context).enterValidName;
               }
-              return null;;
+              return null;
+              ;
             },
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -313,7 +314,9 @@ class _NewLostState extends State<NewLost> {
   bool isValidName(value) {
     final nameRegExp =
         RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
-    return nameRegExp.hasMatch(value);
+    bool output = nameRegExp.hasMatch(value);
+    print(output);
+    return output;
   }
 
   bool isValidPhone(value) {

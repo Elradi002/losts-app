@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/models/lost_item.dart';
 import 'package:provider/provider.dart';
-
+import '../widgets/FoundInformList.dart';
 import '../models/constants.dart';
 import '../models/language_constants.dart';
 import '../providers/items_provider.dart';
@@ -76,7 +76,7 @@ class _FoundScreenState extends State<FoundScreen> {
                     ),
                   ],
                 )
-              : FoundsList(),
+              : FoundInformsList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
