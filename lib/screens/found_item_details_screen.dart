@@ -9,8 +9,9 @@ import '../providers/items_provider.dart';
 
 class FoundItemDetailsScreen extends StatelessWidget {
   static const routeName = '/found-item-detail-screen';
+  //final String image = 'assets/images/lost_item.jpg';
 
-  const FoundItemDetailsScreen({super.key});
+  const FoundItemDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
