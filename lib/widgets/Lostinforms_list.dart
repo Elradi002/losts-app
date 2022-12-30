@@ -7,13 +7,13 @@ import '../screens/lost_item_details_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/items_provider.dart';
 
-class LostInformsList extends StatefulWidget {
-  const LostInformsList({super.key});
+class InformsList extends StatefulWidget {
+  const InformsList({super.key});
   @override
-  State<LostInformsList> createState() => _LostInformsListState();
+  State<InformsList> createState() => _InformsListState();
 }
 
-class _LostInformsListState extends State<LostInformsList> {
+class _InformsListState extends State<InformsList> {
   @override
   Widget build(BuildContext context) {
     final List<LostItem> _informs = context.read<ItemProvider>().lostItems;
@@ -46,7 +46,7 @@ class _LostInformsListState extends State<LostInformsList> {
                           color: Colors.teal[50],
                           image: const DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage("assets/images/lostImage.jpg"),
+                            image: AssetImage("assets/images/lostBag.jpg"),
                           ),
                         ),
                       ),

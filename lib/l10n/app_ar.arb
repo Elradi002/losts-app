@@ -31,7 +31,7 @@
 "hintPlaceOfLost":"مكان الفقدان",
 "phone":"رقم الهاتف",
 "hintPhone":"ادخل رقم الهاتف",
-"itemDescription":"تفاصيل العنصر",
+"itemDescription":": تفاصيل العنصر",
 "noDateChosen":"لم يتم اختيار التاريخ !",
 "pickedDate":"التاريخ :",
 "choseDate":"اختر التاريخ",

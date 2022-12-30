@@ -74,7 +74,7 @@ class _NewFoundState extends State<NewFound> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
-              } else if (val != RegExp(r"^[A-Z a-z]+$")) {
+              } else if (!isValidName(val)) {
                 return translation(context).enterValidName;
               }
               return null;
@@ -121,9 +121,9 @@ class _NewFoundState extends State<NewFound> {
             validator: (val) {
               if (val != null && val.isEmpty) {
                 return translation(context).requiredField;
-              } else if (val!.length != 10) {
+              } else if (val!.length < 10) {
                 return translation(context).requiredFieldPh;
-              } else if (val != RegExp(r"[0-9]")) {
+              } else if (!isValidPhone(val)) {
                 return translation(context).enterValidPhone;
               }
               return null;
@@ -215,6 +215,18 @@ class _NewFoundState extends State<NewFound> {
       ),
     );
   }
+
+  bool isValidName(value) {
+    final nameRegExp =
+        RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
+    return nameRegExp.hasMatch(value);
+  }
+
+  bool isValidPhone(value) {
+    final nameRegExp = RegExp(r"[0-9]");
+    return nameRegExp.hasMatch(value);
+  }
+}
 // CustomButton(
 //     backgroundColor: Theme.of(context).colorScheme.secondary,
 //     text: translation(context).submit,
@@ -295,5 +307,3 @@ class _NewFoundState extends State<NewFound> {
 //       ],
 //     ),
 //     const SizedBox(height: 20.0),
-
-}

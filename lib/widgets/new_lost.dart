@@ -173,7 +173,6 @@ class _NewLostState extends State<NewLost> {
                 return translation(context).enterValidName;
               }
               return null;
-              ;
             },
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
