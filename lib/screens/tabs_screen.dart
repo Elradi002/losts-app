@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:losts_app/widgets/LanguageIcon.dart';
 
 import '../models/language_constants.dart';
-import '../widgets/main_drawer.dart';
 import 'founds_screen.dart';
 import 'lost_screen.dart';
 
@@ -30,16 +28,6 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(translation(context).lostAndFound
-              //_screens[_selectedScreenIndex]['title'],
-              ),
-          actions: const [
-            //SearchIcon(),
-            LanguageIcon(),
-          ],
-        ),
-        drawer: MainDrawer(),
         body: _screens[_selectedScreenIndex]['screen'],
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).colorScheme.primary,

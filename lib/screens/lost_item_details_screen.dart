@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:losts_app/widgets/main_drawer.dart';
-import 'package:provider/provider.dart';
 
 import '../models/constants.dart';
 import '../models/language_constants.dart';
-import '../providers/items_provider.dart';
+import '../widgets/search_icon.dart';
 
 class LostItemDetailsScreen extends StatelessWidget {
   static const routeName = '/lost-item-detail-screen';
@@ -14,12 +13,17 @@ class LostItemDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemId = ModalRoute.of(context)!.settings.arguments as int;
-    final item = context.read<ItemProvider>().lostByID(itemId);
+    // final itemId = ModalRoute.of(context)!.settings.arguments as int;
+    // final item = context.read<ItemProvider>().lostByID(itemId);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("${translation(context).lostItem} ${item.name}"),
+          title: Text('title'
+              //"${translation(context).lostItem} ${item.name}"
+              ),
+          actions: const [
+            SearchIcon(),
+          ],
         ),
         drawer: const MainDrawer(),
         body: SingleChildScrollView(
