@@ -22,6 +22,7 @@ class ItemProvider with ChangeNotifier {
   DioService dioService = DioService();
 
   Future<void> getFounds() async {
+
     _foundItems = await dioService.getFounds();
     errorMessage = dioService.errorMessage;
     print("from get founds : $errorMessage");
@@ -41,6 +42,7 @@ class ItemProvider with ChangeNotifier {
     if (dioService.addFoundFlag == true) {
       _addFoundDone = true;
       errorMessage = dioService.errorMessage;
+      _foundItems = await dioService.getFounds();
       notifyListeners();
       return true;
     }
@@ -52,6 +54,9 @@ class ItemProvider with ChangeNotifier {
     if (adding) {
       _addLostDone = true;
       errorMessage = dioService.errorMessage;
+      _lostItems = [];
+      _lostItems = await dioService.getlost();
+      notifyListeners();
       return true;
     }
     notifyListeners();
