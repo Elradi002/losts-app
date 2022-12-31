@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:losts_app/widgets/main_drawer.dart';
+import 'package:provider/provider.dart';
 
 import '../models/constants.dart';
 import '../models/language_constants.dart';
+import '../providers/items_provider.dart';
 import '../widgets/search_icon.dart';
 
 class LostItemDetailsScreen extends StatelessWidget {
   static const routeName = '/lost-item-detail-screen';
-
-  const LostItemDetailsScreen({super.key});
+  // String image = '';
+  // LostItemDetailsScreen(this.image);
 
   @override
   Widget build(BuildContext context) {
-    // final itemId = ModalRoute.of(context)!.settings.arguments as int;
-    // final item = context.read<ItemProvider>().lostByID(itemId);
+    final itemId = ModalRoute.of(context)!.settings.arguments as int;
+    final item = context.read<ItemProvider>().lostByID(itemId);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('title'
-              //"${translation(context).lostItem} ${item.name}"
-              ),
+          title: Text("${translation(context).lostItem} ${item.name}"),
           actions: const [
             SearchIcon(),
           ],
@@ -68,26 +68,26 @@ class LostItemDetailsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.place,
                                     color: Colors.black87,
                                   ),
                                   SizedBox(width: 5.0),
-                                  Text("Khartoum",
+                                  Text(item.place.toString(),
                                       overflow: TextOverflow.ellipsis,
                                       style: kSmallTittle),
                                 ],
                               ),
                               Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.phone_in_talk,
                                     color: Colors.black87,
                                   ),
                                   SizedBox(width: 5.0),
                                   Text(
-                                    "+249 9975743",
+                                    item.phoneNumber.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(color: Colors.grey),
                                   ),
@@ -101,7 +101,7 @@ class LostItemDetailsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5.0),
                                   Text(
-                                    DateFormat.yMd().format(DateTime.now()),
+                                    DateFormat.yMd().format(item.date),
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                 ],
@@ -114,8 +114,8 @@ class LostItemDetailsScreen extends StatelessWidget {
                             style: kLargeTittle,
                           ),
                           const SizedBox(height: 10),
-                          const Text(
-                            'Lost Bag mlkkl jlji hoj iji ioopi didiiop sd poio oidipo popoid ipoid poid ipoid oipoid poidw opoid opoi opoipod poidi ',
+                          Text(
+                            item.description,
                             style: kDetailsText,
                             textAlign: TextAlign.justify,
                           ),

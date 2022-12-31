@@ -74,9 +74,10 @@ class _NewFoundState extends State<NewFound> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
-              } else if (!isValidName(val)) {
-                return translation(context).enterValidName;
               }
+              //  else if (!isValidName(val)) {
+              //   return translation(context).enterValidName;
+              // }
               return null;
             },
             decoration: InputDecoration(

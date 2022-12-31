@@ -68,12 +68,12 @@ class _SplashScreenState extends State<SplashScreen> {
                     //circle avatar
                     CircleAvatar(
                       radius: 150.0,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       child: SizedBox(
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
-                                "assets/images/bayan-logo-3.png",
+                                "assets/images/splash.jpg",
                               ))),
                     ),
 
@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       padding: EdgeInsets.only(top: 10.0),
                     ),
                     Text(
-                      " تطبيق المفقودات في الحرم الجامعي ",
+                      "تطبيق المفقودات والموجودات",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24.0,
@@ -101,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircularProgressIndicator(),
+                    CircularProgressIndicator(color: Colors.white),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
@@ -124,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ],

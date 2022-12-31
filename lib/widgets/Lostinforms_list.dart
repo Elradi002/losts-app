@@ -16,7 +16,7 @@ class LostInformsList extends StatefulWidget {
 class _LostInformsListState extends State<LostInformsList> {
   @override
   Widget build(BuildContext context) {
-    final List<LostItem> _informs = context.read<ItemProvider>().lostItems;
+    final List<LostItem> _informs = context.watch<ItemProvider>().lostItems;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8.0),
@@ -27,9 +27,9 @@ class _LostInformsListState extends State<LostInformsList> {
             itemBuilder: (ctx, index) {
               return InkWell(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(LostItemDetailsScreen.routeName, arguments:
-                     index,
+                  Navigator.of(context).pushNamed(
+                    LostItemDetailsScreen.routeName,
+                    arguments: index,
                   );
                 },
                 child: Container(
@@ -46,7 +46,7 @@ class _LostInformsListState extends State<LostInformsList> {
                           color: Colors.teal[50],
                           image: const DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage("assets/images/lostBag.jpg"),
+                            image: AssetImage("assets/images/lostImg.jpg"),
                           ),
                         ),
                       ),

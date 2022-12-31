@@ -20,14 +20,16 @@ class DioService {
 
   Future<List<LostItem>> getFounds() async {
     final response = await http.get(Uri.parse(foundUrl));
-    final extractedData = json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+    final extractedData =
+        json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     if (extractedData == null) {
       return [];
     }
     // print(extractedData);
     try {
+      _founds.clear();
       extractedData.forEach((itemData) {
-        founds.add(LostItem(
+        _founds.add(LostItem(
           id: itemData['id'].toString(),
           name: itemData['itemName'],
           date: DateTime.parse(itemData['date']),
@@ -38,7 +40,7 @@ class DioService {
         ));
       });
       print(founds);
-      return founds;
+      return _founds;
     } on DioError catch (e) {
       if (e.response != null) {
         print(e.response!.data);
@@ -65,14 +67,16 @@ class DioService {
   // return lost Items
   Future<List<LostItem>> getlost() async {
     final response = await http.get(Uri.parse(lostUrl));
-    final extractedData = json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+    final extractedData =
+        json.decode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     if (extractedData == null) {
       return [];
     }
     // print(extractedData);
     try {
+      _losts.clear();
       extractedData.forEach((itemData) {
-        losts.add(LostItem(
+        _losts.add(LostItem(
           id: itemData['id'].toString(),
           name: itemData['itemName'],
           date: DateTime.parse(itemData['date']),
@@ -83,7 +87,7 @@ class DioService {
         ));
       });
       print(losts);
-      return losts;
+      return _losts;
     } on DioError catch (e) {
       if (e.response != null) {
         print(e.response!.data);
@@ -231,7 +235,7 @@ class DioService {
       final response = await http
           .get(Uri.parse('http://localhost:8080/api/V1/Found/server_status'));
       print(response);
-      
+
       return true;
     } on DioError catch (e) {
       if (e.response != null) {

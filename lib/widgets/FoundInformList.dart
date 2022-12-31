@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:losts_app/screens/found_item_details_screen.dart';
 
 import '../models/constants.dart';
 import '../models/lost_item.dart';
@@ -16,7 +17,7 @@ class FoundInformsList extends StatefulWidget {
 class _FoundInformsListState extends State<FoundInformsList> {
   @override
   Widget build(BuildContext context) {
-    final List<LostItem> _informs = context.read<ItemProvider>().lostItems;
+    final List<LostItem> _informs = context.watch<ItemProvider>().foundItems;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8.0),
@@ -27,10 +28,9 @@ class _FoundInformsListState extends State<FoundInformsList> {
             itemBuilder: (ctx, index) {
               return InkWell(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(LostItemDetailsScreen.routeName, arguments:
-                     index,
-                  );
+                  Navigator.of(context).pushNamed(
+                      FoundItemDetailsScreen.routeName,
+                      arguments: index);
                 },
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 10),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/models/lost_item.dart';
 import 'package:losts_app/providers/items_provider.dart';
+import 'package:losts_app/screens/search_screen.dart';
+import 'package:losts_app/widgets/Lostinforms_list.dart';
 import 'package:losts_app/widgets/new_lost.dart';
 import 'package:provider/provider.dart';
 
 import '../models/language_constants.dart';
+import '../widgets/FoundInformList.dart';
 import '../widgets/main_drawer.dart';
+import '../models/constants.dart';
 
 class LostScreen extends StatefulWidget {
   static const routeName = '/lost-screen';
@@ -122,7 +126,56 @@ class _LostScreenState extends State<LostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<LostItem> _losts = context.watch<ItemProvider>().lostItems;
+    List<LostItem> _losts = [];
+    List<LostItem> _displayLosts = [];
+    bool searchResults = false;
+    Provider.of<ItemProvider>(context, listen: false).getLosts();
+    Provider.of<ItemProvider>(context, listen: false)
+        .lostItems
+        .forEach((element) {
+      _losts.add(element);
+    });
+
+    // List<LostItem> _displayItem = _founds;
+    void updateList(String value) {
+      setState(() {
+        _displayLosts = _losts.where((element) =>
+            // switch(element)
+            // {
+            // Case(element.name.toLowerCase().contains(value.toLowerCase())):
+            //   return element.name.toLowerCase().contains(value.toLowerCase()).toList();
+            // case(element.)
+            // }
+
+            element.name.toLowerCase().contains(value.toLowerCase())).toList();
+
+        searchResults = true;
+        //print(SearchResults);
+      });
+    }
+
+    Widget items(context) {
+      if (_losts.isEmpty) {
+        return Column(
+          children: [
+            Center(
+              child: Text(
+                translation(context).noLostFoundsItemsAddedYet,
+                style: kLargeTittle,
+              ),
+            ),
+            Image.asset(
+              'assets/images/searchIcon.jpg',
+              fit: BoxFit.cover,
+            ),
+          ],
+        );
+      } else {
+        return LostInformsList();
+      }
+    }
+
+    // List<LostItem> _losts = context.watch<ItemProvider>().lostItems;
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -130,76 +183,67 @@ class _LostScreenState extends State<LostScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(translation(context).lostAndFound),
-            Container(
-              width: 200,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) => updateList(value),
-                  autofocus: true,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    // suffixIcon: IconButton(
-                    //   icon: const Icon(Icons.clear, color: Colors.teal),
-                    // onPressed: () {
-                    //   TextEditingController.
-                    // },
-                    // ),
-                    // prefixIconColor: Colors.teal,
-                    // hintText: translation(context).searchText,
-                    // border: InputBorder.none),
-                  ),
-                ),
-              ),
+            InkWell(
+              child: const Icon(Icons.search, size: 32, color: Colors.white),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SearchScreen(_losts, "assets/images/lostImg.jpg")));
+                // Navigator.of(context).pushNamed(LostScreen.routeName);
+              },
             ),
           ],
         ),
       ),
       drawer: const MainDrawer(),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Expanded(
-          child: ListView.builder(
-            itemCount: displayList.length,
-            itemBuilder: (context, index) => Card(
-              elevation: 5.0,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Text(displayList[index].id),
-                    Text(displayList[index].name),
-                    Text('${displayList[index].date}'),
-                    Text(displayList[index].type),
-                    Text(displayList[index].place),
-                    Text('${displayList[index].phoneNumber}'),
-                    Text(displayList[index].description),
-                  ],
-                ),
-              ),
-            ),
+          padding: const EdgeInsets.only(top: 20), child: items(context)
+
+          //  Padding(
+          //   padding: const EdgeInsets.only(top: 20),
+          //   child: Expanded(
+          //     child: ListView.builder(
+          //       itemCount: displayList.length,
+          //       itemBuilder: (context, index) => Card(
+          //         elevation: 5.0,
+          //         child: Container(
+          //           padding: const EdgeInsets.all(10),
+          //           child: Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               //Text(displayList[index].id),
+          //               Text(displayList[index].name),
+          //               Text('${displayList[index].date}'),
+          //               Text(displayList[index].type),
+          //               Text(displayList[index].place),
+          //               Text('${displayList[index].phoneNumber}'),
+          //               Text(displayList[index].description),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          //   // _losts.isEmpty
+          //   //     ? Column(
+          //   //         children: [
+          //   //           Center(
+          //   //             child: Text(
+          //   //               translation(context).noLostFoundsItemsAddedYet,
+          //   //               style: kLargeTittle,
+          //   //             ),
+          //   //           ),
+          //   //           Image.asset(
+          //   //             'assets/images/searchIcon.jpg',
+          //   //             fit: BoxFit.cover,
+          //   //           ),
+          //   //         ],
+          //   //       )
+          //   //     : const InformsList(),
+          // ),
           ),
-        ),
-        // _losts.isEmpty
-        //     ? Column(
-        //         children: [
-        //           Center(
-        //             child: Text(
-        //               translation(context).noLostFoundsItemsAddedYet,
-        //               style: kLargeTittle,
-        //             ),
-        //           ),
-        //           Image.asset(
-        //             'assets/images/searchIcon.jpg',
-        //             fit: BoxFit.cover,
-        //           ),
-        //         ],
-        //       )
-        //     : const InformsList(),
-      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
           Icons.add,

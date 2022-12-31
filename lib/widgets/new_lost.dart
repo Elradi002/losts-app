@@ -169,9 +169,10 @@ class _NewLostState extends State<NewLost> {
                 return translation(context).requiredField;
               } else if (val!.length < 8) {
                 return translation(context).requiredFieldNum;
-              } else if (!isValidName(val)) {
-                return translation(context).enterValidName;
-              }
+              } 
+              // else if (!isValidName(val)) {
+              //   return translation(context).enterValidName;
+              // }
               return null;
             },
             decoration: InputDecoration(
@@ -275,7 +276,7 @@ class _NewLostState extends State<NewLost> {
               if (_key.currentState != null && _key.currentState!.validate()) {
                 context
                     .read<ItemProvider>()
-                    .addFound(
+                    .addLost(
                       LostItem(
                         id: '',
                         name: _nameController.text,

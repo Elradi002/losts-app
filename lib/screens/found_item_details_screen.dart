@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:losts_app/models/lost_item.dart';
 import 'package:losts_app/widgets/main_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -7,15 +8,21 @@ import '../models/constants.dart';
 import '../models/language_constants.dart';
 import '../providers/items_provider.dart';
 
-class FoundItemDetailsScreen extends StatelessWidget {
+class FoundItemDetailsScreen extends StatefulWidget {
   static const routeName = '/found-item-detail-screen';
+
   //final String image = 'assets/images/lost_item.jpg';
 
-  const FoundItemDetailsScreen({Key? key}) : super(key: key);
+  FoundItemDetailsScreen();
 
   @override
+  State<FoundItemDetailsScreen> createState() => _FoundItemDetailsScreenState();
+}
+
+class _FoundItemDetailsScreenState extends State<FoundItemDetailsScreen> {
+  @override
   Widget build(BuildContext context) {
-    final itemId = ModalRoute.of(context)?.settings.arguments as int;
+    final itemId = ModalRoute.of(context)!.settings.arguments as int;
     final item = context.read<ItemProvider>().foundByID(itemId);
     return SafeArea(
       child: Scaffold(
@@ -65,26 +72,26 @@ class FoundItemDetailsScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.place,
                                     color: Colors.black87,
                                   ),
                                   SizedBox(width: 5.0),
-                                  Text("Khartoum",
+                                  Text(item.place.toString(),
                                       overflow: TextOverflow.ellipsis,
                                       style: kSmallTittle),
                                 ],
                               ),
                               Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.phone_in_talk,
                                     color: Colors.black87,
                                   ),
                                   SizedBox(width: 5.0),
                                   Text(
-                                    "+249 9975743",
+                                    item.phoneNumber.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(color: Colors.grey),
                                   ),
@@ -96,9 +103,9 @@ class FoundItemDetailsScreen extends StatelessWidget {
                                     Icons.calendar_month,
                                     color: Colors.black87,
                                   ),
-                                  const SizedBox(width: 5.0),
+                                  SizedBox(width: 5.0),
                                   Text(
-                                    DateFormat.yMd().format(DateTime.now()),
+                                    DateFormat.yMd().format(item.date),
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                 ],
@@ -111,8 +118,8 @@ class FoundItemDetailsScreen extends StatelessWidget {
                             style: kLargeTittle,
                           ),
                           const SizedBox(height: 10),
-                          const Text(
-                            'Lost Bag mlkkl jlji hoj iji ioopi didiiop sd poio oidipo popoid ipoid poid ipoid oipoid poidw opoid opoi opoipod poidi ',
+                          Text(
+                            item.description.toString(),
                             style: kDetailsText,
                             textAlign: TextAlign.justify,
                           ),

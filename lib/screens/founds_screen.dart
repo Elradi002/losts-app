@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:losts_app/models/lost_item.dart';
+import 'package:losts_app/widgets/FoundInformList.dart';
+import 'package:losts_app/widgets/search_icon.dart';
 import 'package:provider/provider.dart';
-
+import '../screens/search_screen.dart';
 import '../models/constants.dart';
 import '../models/language_constants.dart';
 import '../providers/items_provider.dart';
@@ -70,24 +72,11 @@ class _FoundScreenState extends State<FoundScreen> {
   // ];
 
   List<LostItem> displayList = <LostItem>[];
-  void updateList(String value, List<LostItem> items) {
-    setState(() {
-      displayList = items.where((element) =>
-          // switch(element)
-          // {
-          // Case(element.name.toLowerCase().contains(value.toLowerCase())):
-          //   return element.name.toLowerCase().contains(value.toLowerCase()).toList();
-          // case(element.)
-          // }
 
-          element.name.toLowerCase().contains(value.toLowerCase())).toList();
-    });
-  }
-
-  InitState() {
-    super.initState();
-    print("from found init state ");
-  }
+  // InitState() {
+  //   super.initState();
+  //   print("from found init state ");
+  // }
 
   void _addNewFound(
     String itemName,
@@ -121,8 +110,54 @@ class _FoundScreenState extends State<FoundScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<LostItem> _founds = [];
+    List<LostItem> _displayfounds = [];
+    bool searchResults = false;
     Provider.of<ItemProvider>(context, listen: false).getFounds();
-    List<LostItem> _founds = context.watch<ItemProvider>().foundItems;
+    Provider.of<ItemProvider>(context, listen: false)
+        .foundItems
+        .forEach((element) {
+      _founds.add(element);
+    });
+
+    // List<LostItem> _displayItem = _founds;
+    void updateList(String value) {
+      setState(() {
+        _displayfounds = _founds.where((element) =>
+            // switch(element)
+            // {
+            // Case(element.name.toLowerCase().contains(value.toLowerCase())):
+            //   return element.name.toLowerCase().contains(value.toLowerCase()).toList();
+            // case(element.)
+            // }
+
+            element.name.toLowerCase().contains(value.toLowerCase())).toList();
+
+        searchResults = true;
+        //print(SearchResults);
+      });
+    }
+
+    Widget items(context) {
+      if (_founds.isEmpty) {
+        return Column(
+          children: [
+            Center(
+              child: Text(
+                translation(context).noLostFoundsItemsAddedYet,
+                style: kLargeTittle,
+              ),
+            ),
+            Image.asset(
+              'assets/images/foundIcon.jpg',
+              fit: BoxFit.cover,
+            ),
+          ],
+        );
+      } else {
+        return FoundInformsList();
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -131,59 +166,51 @@ class _FoundScreenState extends State<FoundScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(translation(context).lostAndFound),
-            Container(
-              width: 200,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) => updateList(value, _founds),
-                  autofocus: true,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    // suffixIcon: IconButton(
-                    //   icon: const Icon(Icons.clear, color: Colors.teal),
-                    // onPressed: () {
-                    //   TextEditingController.
-                    // },
-                    // ),
-                    // prefixIconColor: Colors.teal,
-                    // hintText: translation(context).searchText,
-                    // border: InputBorder.none),
-                  ),
-                ),
-              ),
+            InkWell(
+              child: const Icon(Icons.search, size: 32, color: Colors.white),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchScreen(_founds,"assets/images/foundImg.jpg")));
+                // Navigator.of(context).pushNamed(LostScreen.routeName);
+              },
+
+              // TextField(
+              //   // onSubmitted: (value) => updateList(value),
+              //   onTap: (() =>
+
+              //   // onSubmitted: (value) => Navigator.push(context
+
+              //   // (value) => updateList(value),
+              //   autofocus: true,
+              //   decoration: const InputDecoration(
+              //     prefixIcon: Icon(Icons.search),
+              //     // suffixIcon: IconButton(
+              //     //   icon: const Icon(Icons.clear, color: Colors.teal),
+              //     // onPressed: () {
+              //     //   TextEditingController.
+              //     // },
+              //     // ),
+              //     // prefixIconColor: Colors.teal,
+              //     // hintText: translation(context).searchText,
+              //     // border: InputBorder.none),
+              //   ),
+              // ),
             ),
           ],
         ),
       ),
       drawer: const MainDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: _founds.isEmpty
-              ? Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        translation(context).noLostFoundsItemsAddedYet,
-                        style: kLargeTittle,
-                      ),
-                    ),
-                    Image.asset(
-                      'assets/images/foundIcon.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                )
-              : displayList.isEmpty
-                  ? const Center(
-                      child: Text('No results found'),
-                    )
-                  : const FoundsList(),
-        ),
-      ),
+      body:
+          Padding(padding: const EdgeInsets.only(top: 20), child: items(context)
+
+              //  displayList.isEmpty
+              //     ? const Center(
+              //         child: Text('No results found'),
+              //       )
+              //     : c
+              ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
           Icons.add,

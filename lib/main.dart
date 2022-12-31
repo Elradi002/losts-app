@@ -68,12 +68,10 @@ class _MyAppState extends State<MyApp> {
       home: SplashScreen(),
       routes: {
         TabsScreen.routeName: (context) => const TabsScreen(),
-        SearchScreen.routeName: (context) => const SearchScreen(),
-        LostItemDetailsScreen.routeName: (context) =>
-            const LostItemDetailsScreen(),
-        FoundItemDetailsScreen.routeName: (context) =>
-            const FoundItemDetailsScreen(),
-        LostScreen.routeName: (context) => const LostScreen(),
+        // SearchScreen.routeName: (context) => const SearchScreen(),
+        LostItemDetailsScreen.routeName: (context) => LostItemDetailsScreen(),
+        FoundItemDetailsScreen.routeName: (context) => FoundItemDetailsScreen(),
+        LostScreen.routeName: (context) => LostScreen(),
       },
     );
   }
